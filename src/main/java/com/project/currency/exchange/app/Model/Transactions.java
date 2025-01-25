@@ -4,12 +4,12 @@ package com.project.currency.exchange.app.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-
-@Entity
 @Data
+@Entity
 @Table(name = "transactions")
 @Builder
 @AllArgsConstructor

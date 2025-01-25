@@ -80,7 +80,7 @@ public class ExchangeRateService {
         return symbols.keySet();
     }
 
-    private void validateCurrency(String currency) {
+    public void validateCurrency(String currency) {
         Set<String> validCurrencies = getSupportedCurrencies();
         if (currency == null || !validCurrencies.contains(currency.toUpperCase())) {
             throw new InvalidCurrencyException("Currency " + currency + " is not valid.");

@@ -38,8 +38,8 @@ public class TransactionService {
         if (request.amount() == null || request.amount().compareTo(BigDecimal.ZERO) <= 0) {
             throw new InvalidAmountException("Amount must be greater than zero.");
         }
-        validateCurrency(request.sourceCurrency());
-        validateCurrency(request.targetCurrency());
+        exchangeRateService.validateCurrency((request.sourceCurrency()));
+        exchangeRateService.validateCurrency((request.targetCurrency()));
 
 
         double exchangeRate = exchangeRateService.getExchangeRate(request.sourceCurrency(), request.targetCurrency());
@@ -94,8 +94,13 @@ public class TransactionService {
     }
 
     private void validateCurrency(String currency) {
+
+        if (currency == null || currency.trim().isEmpty()) {
+            return;
+        }
+
         Set<String> validCurrencies = exchangeRateService.getSupportedCurrencies();
-        if (currency == null || !validCurrencies.contains(currency.toUpperCase())) {
+        if (!validCurrencies.contains(currency.toUpperCase())) {
             throw new InvalidCurrencyException("Currency " + currency + " is not valid.");
         }
     }

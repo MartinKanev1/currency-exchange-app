@@ -27,17 +27,21 @@ public class TransactionSpecification {
             }
 
 
-            if (searchDTO.sourceCurrency() != null && !searchDTO.sourceCurrency().isEmpty()) {
+            if (searchDTO.sourceCurrency() != null && !searchDTO.sourceCurrency().trim().isEmpty()) {
                 predicates.add(criteriaBuilder.equal(
                         root.get("sourceCurrency"), searchDTO.sourceCurrency()));
             }
 
 
-            if (searchDTO.targetCurrency() != null && !searchDTO.targetCurrency().isEmpty()) {
+            if (searchDTO.targetCurrency() != null && !searchDTO.targetCurrency().trim().isEmpty()) {
                 predicates.add(criteriaBuilder.equal(
                         root.get("targetCurrency"), searchDTO.targetCurrency()));
             }
 
+
+            if (predicates.isEmpty()) {
+                return criteriaBuilder.conjunction();
+            }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
