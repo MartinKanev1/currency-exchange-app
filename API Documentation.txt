@@ -1,0 +1,284 @@
+API Documentation for Currency Exchange Application
+
+
+
+1. Exchange Rate Endpoint
+Description: Retrieves the current exchange rate between two currencies.
+Method: GET
+URL: /api/exchange-rate
+Query Parameters:
+
+currentCurrency (string, required): The source currency code (e.g., USD).
+targetCurrency (string, required): The target currency code (e.g., EUR).
+Response:
+
+
+
+{
+    "rate": 0.9549
+}
+
+
+GET /api/exchange-rate?currentCurrency=INVALID&targetCurrency=EUR
+
+
+{
+    "error": "InvalidCurrencyException",
+    "message": "Currency INVALID is not valid."
+}
+
+
+
+
+
+
+
+
+2. Currency Conversion Endpoint
+Description: Converts an amount from one currency to another and stores the transaction.
+Method: POST
+URL: /api/transactions/convert
+Request Body:
+
+
+{
+    "amount": 100.50,
+    "sourceCurrency": "USD",
+    "targetCurrency": "EUR"
+}
+Response:
+
+
+{
+    "convertedAmount": 95.49,
+    "transactionId": 1
+}
+
+
+Invalid Amount: Request:
+
+{
+    "amount": -50,
+    "sourceCurrency": "USD",
+    "targetCurrency": "EUR"
+}
+
+Error Response:
+
+{
+    "error": "InvalidAmountException",
+    "message": "Amount must be greater than 0."
+}
+
+Invalid Source Currency: Request:
+
+
+{
+    "amount": 100,
+    "sourceCurrency": "INVALID",
+    "targetCurrency": "EUR"
+}
+
+
+{
+    "error": "InvalidCurrencyException",
+    "message": "Currency INVALID is not valid."
+}
+
+
+
+
+
+
+
+
+
+3. Conversion History Endpoint
+Description: Fetches a list of transactions filtered by date, source currency, or target currency.
+Method: POST
+URL: /api/transactions/search
+Request Body:
+
+
+{
+    "startDate": "2025-01-01",
+    "endDate": "2025-01-31",
+    "sourceCurrency": "USD",
+    "targetCurrency": "EUR"
+}
+Response:
+
+
+[
+    {
+        "transactionId": 1,
+        "amount": 100.50,
+        "sourceCurrency": "USD",
+        "targetCurrency": "EUR",
+        "convertedAmount": 95.49,
+        "date": "2025-01-20T10:15:30"
+    }
+]
+
+
+Different ways of searching:
+Request Body: With only dates
+
+{
+    "startDate": "2025-01-01",
+    "endDate": "2025-01-31"
+    
+}
+
+Request Body: With only currencies
+
+{
+
+    "sourceCurrency": "USD",
+    "targetCurrency": "EUR"
+    
+}
+
+Request Body: Combined
+
+{
+    "startDate": "2025-01-01",
+    "sourceCurrency": "USD",
+    "targetCurrency": "EUR"
+    
+}
+
+Request Body: With only 1 currency
+
+{
+
+    "targetCurrency": "EUR"
+    
+}
+
+
+
+
+Wrong(Error) example:
+{
+    "startDate": "2025-02-01",
+    "endDate": "2025-01-31",
+    "sourceCurrency": "USD",
+    "targetCurrency": "EUR"
+}
+
+
+
+
+Error Response:
+
+
+{
+    "error": "InvalidDateException",
+    "message": "Start date cannot be after end date."
+}
+
+
+
+
+
+
+
+4. Delete Transaction
+Description: Deletes a transaction by its ID.
+Method: DELETE
+URL: /api/transactions/{transactionId}
+Path Parameters:
+
+transactionId (long, required): The ID of the transaction to delete.
+Response:
+200 OK
+
+Error Response:
+
+
+{
+    "error": "TransactionNotFoundException",
+    "message": "Transaction with ID 123 not found."
+}
+
+
+5. Get All Transactions
+Description: Retrieves a list of all transactions in the database.
+Method: GET
+URL: /api/transactions/all
+
+Response:
+
+
+[
+    {
+        "transactionId": 1,
+        "amount": 100.50,
+        "sourceCurrency": "USD",
+        "targetCurrency": "EUR",
+        "convertedAmount": 95.49,
+        "date": "2025-01-20T10:15:30"
+    },
+    {
+        "transactionId": 2,
+        "amount": 200.00,
+        "sourceCurrency": "USD",
+        "targetCurrency": "GBP",
+        "convertedAmount": 152.30,
+        "date": "2025-01-21T12:00:00"
+    }
+]
+
+
+Error Examples:
+No Transactions Found: If the database is empty, the response will be:
+
+[]
+
+
+
+
+
+
+6. Get Transaction by ID
+Description: Retrieves a specific transaction by its ID.
+Method: GET
+URL: /api/transactions/{id}
+Path Parameters:
+
+id (long, required): The ID of the transaction to retrieve.
+Response:
+
+
+{
+    "transactionId": 1,
+    "amount": 100.50,
+    "sourceCurrency": "USD",
+    "targetCurrency": "EUR",
+    "convertedAmount": 95.49,
+    "date": "2025-01-20T10:15:30"
+}
+
+Error Examples:
+Transaction Not Found: Request:
+
+
+GET /api/transactions/99999
+Response:
+
+{
+    "error": "TransactionNotFoundException",
+    "message": "Transaction with ID 99999 not found."
+}
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Error Codes
+InvalidCurrencyException: Currency is not supported or invalid.
+InvalidAmountException: Amount is less than or equal to 0.
+TransactionNotFoundException: Transaction with the specified ID does not exist.
+InvalidDateException: Date range is invalid.
