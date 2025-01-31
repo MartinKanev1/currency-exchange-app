@@ -3,6 +3,9 @@ package com.project.currency.exchange.app;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 @EnableCaching
@@ -12,4 +15,17 @@ public class CurrencyExchangeAppApplication {
 		SpringApplication.run(CurrencyExchangeAppApplication.class, args);
 	}
 
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**") // Разрешава всички маршрути
+						.allowedOrigins("http://127.0.0.1:5500") // Позволява заявки от Live Server
+						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS"); // Позволява тези HTTP методи
+			}
+		};
+	}
+
 }
+
