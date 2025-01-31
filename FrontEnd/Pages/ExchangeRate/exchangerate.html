@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Exchange Rate</title>
+    <link rel="stylesheet" href="exchangerate.css">
+</head>
+<body>
+
+    <a href="../../index.html" class="home-button">Back to Home</a>
+
+    <div class="container">
+        <h1>Exchange Rate</h1>
+
+        <form>
+            <label for="fromCurrency">From:</label>
+            <input type="text" id="fromCurrency" placeholder="Enter currency code (e.g., USD)">
+
+            <label for="toCurrency">To:</label>
+            <input type="text" id="toCurrency" placeholder="Enter currency code (e.g., EUR)">
+
+            <button id="getRateBtn" type="button">Get Rate</button>
+        </form>
+
+        <h2>Exchange Rate: <span id="result"></span></h2>
+    </div>
+    <script src="exchangerate.js"></script>
+</body>
+</html>

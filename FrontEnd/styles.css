@@ -1,0 +1,103 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f9f9ff; /* Светло лилав фон */
+}
+
+/* Navigation Menu */
+nav {
+    background-color: #5a4fcf; /* Лилав фон */
+    color: white;
+    padding: 20px 0; /* Увеличено пространство */
+    text-align: center;
+}
+
+.menu-title {
+    font-size: 24px; /* Заглавие на менюто */
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    color: #fff;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    font-size: 18px; /* Увеличен размер на шрифта */
+}
+
+nav ul li {
+    margin: 0 20px; /* Повече разстояние между елементите */
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Main Content Section */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.main-content .text-box {
+    background-color: #e5e0ff; /* Светло лилав цвят за кутията */
+    border: 2px solid #5a4fcf; /* Лилава рамка */
+    border-radius: 15px; /* Закръглени ъгли */
+    padding: 30px;
+    max-width: 500px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.main-content h1 {
+    color: #5a4fcf;
+    margin: 0;
+    font-size: 24px;
+}
+
+.main-content p {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #333;
+}
+
+/* Background Image */
+.main-content .background img {
+    margin-top: 30px;
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #5a4fcf;
+    border-radius: 10px;
+}
+
+/* Footer */
+footer {
+    background-color: #5a4fcf;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}

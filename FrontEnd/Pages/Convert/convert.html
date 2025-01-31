@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Exchange</title>
+    <link rel="stylesheet" href="convert.css">
+</head>
+<body>
+
+    <a href="../../index.html" class="home-button">Back to Home</a>
+
+    <div class="container">
+        <h1>Currency Exchange</h1>
+
+        <form>
+            <label for="fromCurrency">From:</label>
+            <input type="text" id="fromCurrency" placeholder="Enter currency code (e.g., USD)">
+
+            <label for="toCurrency">To:</label>
+            <input type="text" id="toCurrency" placeholder="Enter currency code (e.g., EUR)">
+
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" placeholder="Enter amount">
+
+            <button id="convertBtn" type="button">Convert</button>
+        </form>
+
+        <h2>Converted Amount: <span id="result"></span></h2>
+        <h2>Transaction ID: <span id="transactionId"></span></h2>
+    </div>
+
+    <script src="convert.js"></script>
+</body>
+</html>
