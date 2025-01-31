@@ -1,7 +1,10 @@
 # Currency Exchange Application
-A Spring Boot application for currency conversion, transaction history, and integration with external exchange rate APIs.
+A FullStack application for currency conversion, transaction history, and integration with external exchange rate APIs.
 
-Made with Spring Boot and PostgreSQL.
+Tech used:
+Back End made with Spring Boot.
+Database - PostgreSQL.
+Front End made with Html, CSS and JavaScript.
 
 ## Features
 - Exchange Rate Endpoint: Retrieve current exchange rates for any two currencies.
